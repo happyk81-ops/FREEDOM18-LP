@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREEDOM18 | 家族・仲間と宮崎を遊び尽くそう！</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-sunny-yellow: #FFD93D;
+            --color-ocean-blue: #4D96FF;
+            --color-accent-orange: #FF8400;
+        }
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        
+        .bg-sunny { background-color: var(--color-sunny-yellow); }
+        .bg-ocean { background-color: var(--color-ocean-blue); }
+        .text-accent { color: var(--color-accent-orange); }
+        
+        .blob {
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            background: var(--color-sunny-yellow);
+        }
+
+        .hover-pop { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .hover-pop:hover { transform: scale(1.05) rotate(1deg); }
+
+        .wave-bg {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%234D96FF' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center bottom;
+        }
+
+        .img-container {
+            background-color: #f3f4f6;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Video container for responsive aspect ratio */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+    <script>
+        function handleImageError(image) {
+            console.warn('Attempting to fix image load for:', image.getAttribute('src'));
+            image.onerror = null;
+            const text = encodeURIComponent(image.alt || 'Photo');
+            image.src = `https://placehold.jp/24/4d96ff/ffffff/800x600.png?text=${text}`;
+            image.parentElement.classList.add('bg-slate-100');
+        }
+    </script>
+</head>
+<body class="text-slate-800 bg-white selection:bg-yellow-200">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 px-4 py-3">
+        <div class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md rounded-full shadow-lg border-2 border-yellow-400 px-6 py-2 flex justify-between items-center">
+            <a href="#" class="text-2xl font-black text-blue-600 tracking-tighter">FREEDOM<span class="text-orange-500">18</span></a>
+            <div class="hidden md:flex space-x-6 font-bold text-sm">
+                <a href="#point" class="hover:text-orange-500 transition font-black">魅力</a>
+                <a href="#room" class="hover:text-orange-500 transition font-black">お部屋</a>
+                <a href="#cruise" class="hover:text-orange-500 transition font-black">クルーズ</a>
+                <a href="#access" class="hover:text-orange-500 transition font-black">アクセス</a>
+            </div>
+            <a href="https://www.airbnb.jp/rooms/1550427936336370060" target="_blank" rel="noopener noreferrer" class="bg-orange-500 text-white px-5 py-2 rounded-full font-bold hover:bg-orange-600 transition shadow-md text-sm md:text-base">予約はこちら！</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden bg-blue-50">
+        <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+            <div>
+                <span class="inline-block bg-yellow-400 text-blue-800 px-4 py-1 rounded-full text-sm font-black mb-6 animate-bounce">
+                    MIYAZAKI VACATION START! ☀️
+                </span>
+                <h2 class="text-5xl md:text-7xl font-black text-blue-600 leading-tight mb-6">
+                    家族・仲間と<br><span class="text-orange-500 italic">宮崎を遊び尽くそう！</span>
+                </h2>
+                <p class="text-lg md:text-xl font-bold text-slate-600 mb-10 leading-relaxed">
+                    空港から車で15分、スタジアムも繁華街もすぐそこ！<br>
+                    清潔感あふれる空間で、最高の思い出作りを。
+                </p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
+                    <div class="bg-white px-6 py-3 rounded-2xl shadow-md border-b-4 border-yellow-400">
+                        <p class="text-xs text-slate-400 font-bold uppercase">Airport</p>
+                        <p class="text-xl font-black text-blue-600 italic">車で15分</p>
+                    </div>
+                    <div class="bg-white px-6 py-3 rounded-2xl shadow-md border-b-4 border-blue-400">
+                        <p class="text-xs text-slate-400 font-bold uppercase">Downtown</p>
+                        <p class="text-xl font-black text-orange-500 italic">徒歩圏内</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="blob absolute -top-10 -right-10 w-64 h-64 -z-10 opacity-40"></div>
+                <div class="img-container rounded-[3rem] shadow-2xl border-8 border-white">
+                    <img src="IMG_6738.jpg" alt="Dining Room" onerror="handleImageError(this)" class="w-full h-auto hover-pop transform rotate-1">
+                </div>
+                <p class="text-xs font-black text-blue-400 mt-4 text-center italic">「いただきます！」が楽しくなる清潔な空間 ✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Highlights -->
+    <section id="point" class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-3xl md:text-4xl font-black text-slate-800 mb-16">
+                ワクワクが止まらない！<br class="md:hidden"> FREEDOM18の魅力 🏠
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+                <div class="order-2 md:order-1 text-left">
+                    <h4 class="text-2xl font-black text-blue-600 mb-6">ゆったりリビングで団らんタイム！</h4>
+                    <p class="text-slate-600 font-bold leading-loose mb-8">
+                        大きなソファとテレビで、夜は映画鑑賞会や明日の計画を立てよう！<br>
+                        ふかふかのセミダブルベッドも2台完備。最大5名様までゆったりお泊りいただけます。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-yellow-50 p-4 rounded-2xl border-2 border-yellow-200">
+                            <span class="block text-2xl mb-2">🍿</span>
+                            <p class="text-xs font-black">Netflix等（個人アカウントログイン時）</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200">
+                            <span class="block text-2xl mb-2">💤</span>
+                            <p class="text-xs font-black">ふかふかベッド完備</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="img-container rounded-[2.5rem] shadow-xl border-4 border-slate-100 -rotate-2">
+                        <img src="IMG_6885.jpg" alt="Living Room" onerror="handleImageError(this)" class="w-full h-auto hover-pop">
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="img-container rounded-[2.5rem] shadow-xl border-4 border-slate-100 rotate-2">
+                        <img src="Living.jpg" alt="Kitchen View" onerror="handleImageError(this)" class="w-full h-auto hover-pop">
+                    </div>
+                </div>
+                <div class="text-left">
+                    <h4 class="text-2xl font-black text-orange-500 mb-6">まるで自宅のような便利さ 🍳</h4>
+                    <p class="text-slate-600 font-bold leading-loose mb-8">
+                        キッチンにはコンロ、炊飯器、電子レンジを完備！<br>
+                        宮崎のスーパーで買ってきた地元の食材をその場で調理して、お部屋パーティーを楽しむのも最高です。
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-sm font-black text-slate-500">
+                            <span class="w-6 h-6 bg-green-400 text-white rounded-full flex items-center justify-center mr-3">✓</span> 🅟目の前（無料）
+                        </li>
+                        <li class="flex items-center text-sm font-black text-slate-500">
+                            <span class="w-6 h-6 bg-green-400 text-white rounded-full flex items-center justify-center mr-3">✓</span> 洗濯機完備（洗剤付き）
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floor Plan Section -->
+    <section id="room" class="py-24 bg-blue-600 wave-bg">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl overflow-hidden mb-24">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-black text-blue-600 mb-4 italic">お部屋のレイアウト 🗺️</h3>
+                    <p class="text-slate-400 font-black tracking-widest uppercase text-xs">Floor Plan</p>
+                </div>
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/2">
+                        <div class="img-container rounded-2xl shadow-inner border border-slate-100">
+                            <img src="madori.jpg" alt="Floor Plan" onerror="handleImageError(this)" class="w-full h-auto">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <h4 class="text-2xl font-black text-slate-800 mb-6">使いやすい1LDK！</h4>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <span class="text-3xl">🛏️</span>
+                                <div>
+                                    <p class="font-black text-blue-600 uppercase text-xs">Main Room</p>
+                                    <p class="font-bold text-slate-600">セミダブルベッド2台を配置した広々スペース</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="text-3xl">🛋️</span>
+                                <div>
+                                    <p class="font-black text-blue-600 uppercase text-xs">Living Space</p>
+                                    <p class="font-bold text-slate-600">ソファーベッドで追加の宿泊もOK！</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <span class="text-3xl">🚻</span>
+                                <div>
+                                    <p class="font-black text-blue-600 uppercase text-xs">Bath & Toilet</p>
+                                    <p class="font-bold text-slate-600">セパレートタイプで複数人の宿泊も快適</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cruise Promotion Section -->
+    <section id="cruise" class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            
+            <div class="max-w-6xl mx-auto bg-gradient-to-br from-blue-500 to-indigo-700 rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative">
+                
+                <!-- Background decoration -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
+
+                <!-- Header Section (Top - Inside the Box) -->
+                <div class="text-center mb-16 relative z-10 border-b border-white/20 pb-10">
+                    <h3 class="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">
+                        大切な人と旅したい<br><span class="text-yellow-300">豪華クルーズの世界へ</span> 🚢
+                    </h3>
+                    <p class="text-blue-100 font-bold">FREEDOM18が提案する、新しい旅のカタチ</p>
+                </div>
+                
+                <!-- Content Section (Middle: Details Left, Video Right) -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10 mb-12">
+                    
+                    <!-- Details Column (Left) -->
+                    <div class="order-2 lg:order-1">
+                        <span class="inline-block bg-yellow-400 text-blue-900 px-4 py-1 rounded-full text-sm font-black mb-6">
+                            月会費わずか $250 (PREMIUM)
+                        </span>
+                        <h4 class="text-3xl font-black mb-6 leading-tight">夢と魔法の<br>ディズニークルーズ 🏰</h4>
+                        <p class="font-bold mb-8 leading-relaxed opacity-90">
+                            韓国・台湾・カリブ海・ハワイ4島など、世界中の航路から選べます。18歳未満無料のMSCベリッシマや、1泊からのショートクルーズも充実！
+                        </p>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">🍴</span>
+                                <p class="font-bold">豪華な食事・プール・ショーがすべて無料！</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">🌍</span>
+                                <p class="font-bold">一度で何か所も寄港地観光。移動中も楽しい♪</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">💰</span>
+                                <p class="font-bold">世界最安値保証のプライスマッチ制度あり！</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Column (Right) -->
+                    <div class="w-full order-1 lg:order-2">
+                        <div class="video-container border-4 border-white/20">
+                            <iframe src="https://drive.google.com/file/d/1s0kFNs9FfDhb-PSE58uM3biAVLLucTuO/preview" allow="autoplay"></iframe>
+                        </div>
+                        <p class="text-center text-[10px] mt-4 opacity-70 italic font-bold uppercase tracking-widest">Experience the magic of cruising</p>
+                    </div>
+                </div>
+
+                <!-- Contact Section (Bottom) -->
+                <div class="relative z-10 max-w-2xl mx-auto border-t border-white/20 pt-10">
+                    <div class="bg-white/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/30 shadow-xl text-center">
+                        <p class="text-lg font-black mb-4 tracking-tight">世界中のクルーズ旅行を最もお得に予約する方法をご案内します。</p>
+                        <p class="text-xs font-bold opacity-80 mb-8 leading-relaxed">下記ボタンより、お名前とメールアドレスをご記入の上お気軽にお問い合わせください。</p>
+                        
+                        <a href="mailto:sougaitsukiyou@gmail.com?subject=%E3%82%AF%E3%83%AB%E3%83%BC%E3%82%BA%E3%81%AB%E8%88%88%E5%91%B3%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%EF%BC%81&body=%E3%80%90%E3%81%8A%E5%90%8D%E5%89%8D%E3%80%91%0D%0A%0D%0A%E3%80%90%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%80%91%0D%0A%0D%0A%E3%82%AF%E3%83%AB%E3%83%BC%E3%82%BA%E6%97%85%E8%A1%8C%E3%81%AE%E8%A9%B3%E7%B4%B0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84%E3%81%A7%E3%81%99%E3%80%82" class="inline-flex items-center justify-center gap-3 bg-yellow-400 text-blue-900 px-10 py-5 rounded-full font-black hover:bg-yellow-300 transition-all shadow-2xl hover-pop text-lg w-full md:w-auto">
+                            <span>メールで詳細を聞いてみる ✉️</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access Section -->
+    <section id="access" class="py-24 bg-slate-50">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-3xl md:text-4xl font-black text-slate-800 mb-12">アクセス 📍</h3>
+            <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border-t-8 border-blue-400">
+                <div class="mb-8">
+                    <p class="text-sm font-black text-blue-500 uppercase tracking-widest mb-2 italic">Address</p>
+                    <p class="text-xl md:text-2xl font-black text-slate-700 leading-relaxed">
+                        宮崎県宮崎市鶴島
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-left">
+                    <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-2xl">
+                        <span class="text-2xl">✈️</span>
+                        <p class="font-bold text-slate-600 text-sm">宮崎空港から車で約15分</p>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-orange-50 rounded-2xl">
+                        <span class="text-2xl">🏙️</span>
+                        <p class="font-bold text-slate-600 text-sm">繁華街まで徒歩圏内</p>
+                    </div>
+                </div>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=宮崎県宮崎市鶴島" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white border-4 border-blue-400 text-blue-500 px-8 py-4 rounded-full font-black hover:bg-blue-400 hover:text-white transition-all shadow-lg hover-pop">
+                    <span>Googleマップで見る</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 6H6a2-2 0 00-2 2v10a2-2 0 002 2h10a2-2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking CTA -->
+    <section id="reserve" class="py-32 bg-yellow-400 text-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <h3 class="text-4xl md:text-6xl font-black text-blue-800 mb-8 leading-tight">
+                宮崎での最高な思い出を、<br>FREEDOM18で！
+            </h3>
+            <div class="mb-10 text-blue-900/60 font-black tracking-widest uppercase text-sm italic">
+                Family Friendly • Clean • Free Parking
+            </div>
+            <a href="https://www.airbnb.jp/rooms/1550427936336370060" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-12 py-6 rounded-[2rem] text-2xl font-black shadow-2xl hover:bg-blue-700 transition transform hover:scale-110 active:scale-95">
+                今すぐ予約する！ 🚀
+            </a>
+            <div class="mt-16 text-[10px] font-bold text-blue-800/50 uppercase space-y-2">
+                <p>旅館業法許可：宮崎市保健所｜宮保衛指令第104号16</p>
+                <p>宮崎県宮崎市鶴島（宮崎空港から車で15分）</p>
+                <p>全館禁煙🚭 / 土足厳禁👟 / 夜はお静かに🤫</p>
+            </div>
+        </div>
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/20 rounded-full"></div>
+        <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-blue-500/10 rounded-full"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-white text-center text-slate-300">
+        <p class="text-xl font-black text-blue-600 mb-4 tracking-tighter">FREEDOM<span class="text-orange-500">18</span></p>
+        <p class="text-[9px] font-bold tracking-[0.3em] uppercase">© 2024 FREEDOM18 MIYAZAKI. Let's enjoy!</p>
+    </footer>
+
+</body>
+</html>
